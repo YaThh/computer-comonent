@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.LoginActivity">
+
+    <ImageView
+        android:id="@+id/imgLoginLogo"
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
+        android:src="@drawable/login_logo"
+        android:contentDescription="@string/app_name"
+        />
+
+    <TextView
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imgLoginLogo"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="95dp"
+        android:layout_marginTop="235dp"
+        android:layout_marginEnd="95dp"
+        android:text="@string/app_name"
+        android:textAlignment="center"
+        android:textColor="#FF5722"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        tools:ignore="TextSizeCheck" />
+
+    <EditText
+        android:id="@+id/edtLoginEmail"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_below="@+id/imgLoginLogo"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="40dp"
+        android:background="@drawable/input"
+        android:gravity="center"
+        android:hint="@string/email"
+        tools:ignore="VisualLintTextFieldSize"
+        android:inputType="text"
+        android:autofillHints="" />
+
+    <EditText
+        android:id="@+id/edtPassword"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_below="@+id/edtLoginEmail"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="40dp"
+        android:autofillHints=""
+        android:background="@drawable/input"
+        android:gravity="center"
+        android:hint="@string/password"
+        android:inputType="textPassword"
+
+        tools:ignore="VisualLintTextFieldSize" />
+    
+    <LinearLayout
+        android:id="@+id/linear_layout_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/edtPassword"
+        android:layout_marginTop="5dp"
+        >
+
+        <com.rey.material.widget.CheckBox
+            android:id="@+id/chkRemember"
+            style="@style/Material.Drawable.CheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:text="@string/remember_me"
+            android:textStyle="bold"
+            android:theme="@style/MyCheckBox"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <TextView
+            android:id="@+id/tvRegister"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="130dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/register"
+            android:clickable="true"
+            android:text="Đăng ký"
+            android:textColor="#000"
+            android:textStyle="bold"
+            tools:ignore="TouchTargetSizeCheck" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnLoginMain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linear_layout_1"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="40dp"
+        android:background="@drawable/button"
+        android:text="@string/login"
+        tools:ignore="VisualLintButtonSize" />
+</RelativeLayout>

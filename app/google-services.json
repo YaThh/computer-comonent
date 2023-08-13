@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1045554734509",
+    "firebase_url": "https://linh-kien-may-vi-tinh-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "linh-kien-may-vi-tinh",
+    "storage_bucket": "linh-kien-may-vi-tinh.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1045554734509:android:9ea6d6589909542db02d24",
+        "android_client_info": {
+          "package_name": "com.example.appbanlinhkien30"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1045554734509-7gen3lie075j7s7vta6npv3j7oa0bjgj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.appbanlinhkien30",
+            "certificate_hash": "00c6ad3a9987481d310f3626e2d77f2931a2788e"
+          }
+        },
+        {
+          "client_id": "1045554734509-0hel3tfkb4ic3q41o8c2r1l3cu66f50i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCw_JzzyoHRtNq1xesfXZWoKv3VgJAdqEk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1045554734509-0hel3tfkb4ic3q41o8c2r1l3cu66f50i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
