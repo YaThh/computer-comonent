@@ -22,7 +22,11 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="Theme.AppBanLinhKien30.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Theme.AppBanLinhKien30.AppBarOverlay" parent="ThemeOverlay.AppCompat.DayNight.ActionBar">
+        <item name="colorPrimary">@color/orange_main</item>
+    </style>
+
+
 
     <style name="Theme.AppBanLinhKien30.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>
