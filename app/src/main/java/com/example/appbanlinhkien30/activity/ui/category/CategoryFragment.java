@@ -8,17 +8,21 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import com.example.appbanlinhkien30.R;
+import com.example.appbanlinhkien30.databinding.FragmentCategoryBinding;
 
 
 public class CategoryFragment extends Fragment {
 
-
+    FragmentCategoryBinding binding;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-
-        View root = inflater.inflate(R.layout.fragment_category, container, false);
+        binding = FragmentCategoryBinding.inflate(inflater, container, false);
+        View root = binding.getRoot();
         return root;
     }
-
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+    }
 }

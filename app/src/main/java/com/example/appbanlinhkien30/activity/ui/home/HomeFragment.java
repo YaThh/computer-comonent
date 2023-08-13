@@ -19,22 +19,18 @@ import com.example.appbanlinhkien30.databinding.FragmentHomeBinding;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class HomeFragment extends Fragment {
-    private Button btnLogout;
+    private FragmentHomeBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_home, container, false);
-        btnLogout = (Button) root.findViewById(R.id.btnLogout);
+        binding = FragmentHomeBinding.inflate(inflater, container, false);
+        View root = binding.getRoot();
 
-        btnLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(requireActivity(), HomeActivity.class));
-                getActivity().finish();
-            }
-        });
         return root;
     }
-
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+    }
 }

@@ -18,8 +18,12 @@
 
     <string name="menu_home">Home</string>
     <string name="menu_profile">Profile</string>
-    <string name="menu_category">Danh mục</string>
+    <string name="menu_category">Danh mục sản phẩm</string>
+    <string name="menu_cart">Giỏ hàng</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+
+    <string name="menu_order">Đơn hàng</string>
+    <string name="menu_logout">Đăng xuất</string>
 </resources>
