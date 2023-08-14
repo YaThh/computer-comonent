@@ -3,6 +3,8 @@ package com.example.appbanlinhkien30.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -31,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
     private com.rey.material.widget.CheckBox chkRemember;
     private Button btnLogin;
     private TextView tvRegister;
+    private Dialog loginProgress;
     private FirebaseAuth fAuth;
     private DatabaseReference rootRef;
     @Override
@@ -51,6 +54,11 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                loginProgress = new Dialog(LoginActivity.this);
+                loginProgress.setContentView(R.layout.dialog_login);
+                loginProgress.setCancelable(false);
+                loginProgress.show();
+
                 if (FieldValidator.checkField(edtEmail) &&
                     FieldValidator.checkField(edtPassword)){
                     fAuth.signInWithEmailAndPassword(edtEmail.getText().toString(), edtPassword.getText().toString())
@@ -58,11 +66,12 @@ public class LoginActivity extends AppCompatActivity {
                                 @Override
                                 public void onSuccess(AuthResult authResult) {
                                     checkUserAccessLevel(authResult.getUser().getUid());
-
+                                    loginProgress.dismiss();
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
+                                    loginProgress.dismiss();
                                     Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                                 }
                             });

@@ -1,5 +1,6 @@
 package com.example.appbanlinhkien30.activity;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
+    private Dialog logoutProgress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,9 +61,15 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
                 if (item.getItemId() == R.id.nav_logout) {
+                    logoutProgress = new Dialog(MainActivity.this);
+                    logoutProgress.setContentView(R.layout.dialog_logout);
+                    logoutProgress.setCancelable(false);
+                    logoutProgress.show();
+
                     FirebaseAuth.getInstance().signOut();
                     startActivity(new Intent(MainActivity.this, HomeActivity.class));
                     finish();
+                    logoutProgress.dismiss();
                     return true;
                 }
                 NavigationUI.onNavDestinationSelected(item, navController);

@@ -26,4 +26,6 @@
 
     <string name="menu_order">Đơn hàng</string>
     <string name="menu_logout">Đăng xuất</string>
+    <string name="logging_in">Đang đăng nhập</string>
+    <string name="logging_out">Đang đăng xuất</string>
 </resources>
