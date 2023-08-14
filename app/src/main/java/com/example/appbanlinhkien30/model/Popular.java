@@ -1,12 +1,12 @@
 package com.example.appbanlinhkien30.model;
 
 public class Popular {
-    String Name;
-    String Description;
-    String Rating;
-    String Discount;
-    String Type;
-    String ImgUrl;
+    private String Name;
+    private String Description;
+    private String Rating;
+    private String Discount;
+    private String Type;
+    private String ImgUrl;
 
     public Popular() {
     }

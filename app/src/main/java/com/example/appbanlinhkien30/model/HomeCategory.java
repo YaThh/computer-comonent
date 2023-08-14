@@ -1,9 +1,9 @@
 package com.example.appbanlinhkien30.model;
 
 public class HomeCategory {
-    String Name;
-    String Type;
-    String ImgUrl;
+    private String Name;
+    private String Type;
+    private String ImgUrl;
 
     public HomeCategory() {
     }

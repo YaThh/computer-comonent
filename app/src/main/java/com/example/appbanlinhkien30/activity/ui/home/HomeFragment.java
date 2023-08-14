@@ -20,9 +20,11 @@ import com.example.appbanlinhkien30.activity.HomeActivity;
 import com.example.appbanlinhkien30.activity.MainActivity;
 import com.example.appbanlinhkien30.adapter.HomeAdapter;
 import com.example.appbanlinhkien30.adapter.PopularAdapter;
+import com.example.appbanlinhkien30.adapter.RecommendationAdapter;
 import com.example.appbanlinhkien30.databinding.FragmentHomeBinding;
 import com.example.appbanlinhkien30.model.HomeCategory;
 import com.example.appbanlinhkien30.model.Popular;
+import com.example.appbanlinhkien30.model.Recommendation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -39,9 +41,11 @@ public class HomeFragment extends Fragment {
     FirebaseFirestore db;
     List<Popular> popularList;
     List<HomeCategory> homeCategoryList;
+    List<Recommendation> recommendList;
     PopularAdapter popularAdapter;
     HomeAdapter homeAdapter;
-    RecyclerView popularRec, homeCateRec;
+    RecommendationAdapter recommendAdapter;
+    RecyclerView popularRec, homeCateRec, recommendRec;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
@@ -87,6 +91,28 @@ public class HomeFragment extends Fragment {
                         homeCategoryList.add(category);
                         homeAdapter.notifyDataSetChanged();
                     }
+                }
+            }
+        });
+
+        //De xuat
+        recommendRec = binding.recRecommend;
+        recommendRec.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));
+        recommendList = new ArrayList<>();
+        recommendAdapter = new RecommendationAdapter(getActivity(), recommendList);
+        recommendRec.setAdapter(recommendAdapter);
+
+        db.collection("Recommendation").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Recommendation recommendation = document.toObject(Recommendation.class);
+                        recommendList.add(recommendation);
+                        recommendAdapter.notifyDataSetChanged();
+                    }
+                } else {
+                    Toast.makeText(getActivity(), "Error: " + task.getException(), Toast.LENGTH_SHORT).show();
                 }
             }
         });
