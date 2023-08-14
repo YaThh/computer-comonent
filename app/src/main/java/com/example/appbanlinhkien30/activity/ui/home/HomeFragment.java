@@ -18,8 +18,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.appbanlinhkien30.R;
 import com.example.appbanlinhkien30.activity.HomeActivity;
 import com.example.appbanlinhkien30.activity.MainActivity;
+import com.example.appbanlinhkien30.adapter.HomeAdapter;
 import com.example.appbanlinhkien30.adapter.PopularAdapter;
 import com.example.appbanlinhkien30.databinding.FragmentHomeBinding;
+import com.example.appbanlinhkien30.model.HomeCategory;
 import com.example.appbanlinhkien30.model.Popular;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -34,24 +36,27 @@ import java.util.List;
 public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
 
-    FirebaseFirestore fStore;
+    FirebaseFirestore db;
     List<Popular> popularList;
+    List<HomeCategory> homeCategoryList;
     PopularAdapter popularAdapter;
-    RecyclerView popularRec;
+    HomeAdapter homeAdapter;
+    RecyclerView popularRec, homeCateRec;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
-        fStore = FirebaseFirestore.getInstance();
+        db = FirebaseFirestore.getInstance();
 
         View root = binding.getRoot();
 
+        //San pham noi bat
         popularRec = binding.recPopular;
         popularRec.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));
         popularList = new ArrayList<>();
         popularAdapter = new PopularAdapter(getActivity(), popularList);
         popularRec.setAdapter(popularAdapter);
 
-        fStore.collection("PopularProduct").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        db.collection("PopularProduct").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
@@ -65,6 +70,27 @@ public class HomeFragment extends Fragment {
                 }
             }
         });
+
+        //Danh muc san pham
+        homeCateRec = binding.recExplore;
+        homeCateRec.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));
+        homeCategoryList = new ArrayList<>();
+        homeAdapter = new HomeAdapter(getActivity(), homeCategoryList);
+        homeCateRec.setAdapter(homeAdapter);
+
+        db.collection("HomeCategory").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        HomeCategory category = document.toObject(HomeCategory.class);
+                        homeCategoryList.add(category);
+                        homeAdapter.notifyDataSetChanged();
+                    }
+                }
+            }
+        });
+
         return root;
     }
     @Override
