@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -53,6 +55,9 @@ public class HomeFragment extends Fragment {
 
         View root = binding.getRoot();
 
+        binding.pBarHome.setVisibility(View.VISIBLE);
+        binding.svHome.setVisibility(View.GONE);
+
         //San pham noi bat
         popularRec = binding.recPopular;
         popularRec.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));
@@ -68,6 +73,10 @@ public class HomeFragment extends Fragment {
                         Popular popularProduct = document.toObject(Popular.class);
                         popularList.add(popularProduct);
                         popularAdapter.notifyDataSetChanged();
+
+                        binding.pBarHome.setVisibility(View.GONE);
+                        binding.svHome.setVisibility(View.VISIBLE);
+
                     }
                 } else {
                     Toast.makeText(getActivity(), "Error: " + task.getException(), Toast.LENGTH_SHORT).show();

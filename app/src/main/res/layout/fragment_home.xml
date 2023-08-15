@@ -1,130 +1,147 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.ui.home.HomeFragment">
 
-   <LinearLayout
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:orientation="vertical">
-       
-       <EditText
-           android:id="@+id/edtSearchBox"
-           android:elevation="3dp"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:layout_margin="8dp"
-           android:padding="12dp"
-           android:hint="Nhập sản phẩm muốn tìm"
-           android:drawableLeft="@drawable/search"
-           android:background="@drawable/input_search"
-           android:maxLines="1"
-           >
+    <com.rey.material.widget.ProgressView
+        android:id="@+id/pBarHome"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="20dp"
+        app:pv_circular="true"
+        app:pv_autostart="true"
+        app:pv_progressStyle="@style/CircularProgress"
+        android:layout_centerInParent="true"
+        app:pv_progressMode="indeterminate"
+        ></com.rey.material.widget.ProgressView>
 
-       </EditText>
-       
+    <ScrollView
+        android:id="@+id/svHome"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
        <LinearLayout
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
-           android:layout_marginLeft="10dp"
-           android:layout_marginRight="10dp"
-           android:orientation="horizontal"
-           android:weightSum="2">
+           android:orientation="vertical">
 
-           <TextView
+           <EditText
+               android:id="@+id/edtSearchBox"
+               android:elevation="3dp"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
-               android:layout_weight="1"
-               android:text="Sản phẩm bán chạy"
-               android:textStyle="bold"
-               android:textSize="18sp"/>
-           <TextView
-               android:id="@+id/tvShowMorePopular"
-               android:gravity="end"
-               android:layout_weight="1"
+               android:layout_margin="8dp"
+               android:padding="12dp"
+               android:hint="Nhập sản phẩm muốn tìm"
+               android:drawableLeft="@drawable/search"
+               android:background="@drawable/input_search"
+               android:maxLines="1"
+               >
+
+           </EditText>
+
+           <LinearLayout
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
-               android:layout_marginRight="7dp"
-               android:text="Hiển thị thêm"
-               android:textSize="16sp"
-               android:textColor="@color/orange_main">
+               android:layout_marginLeft="10dp"
+               android:layout_marginRight="10dp"
+               android:orientation="horizontal"
+               android:weightSum="2">
 
-           </TextView>
+               <TextView
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_weight="1"
+                   android:text="Sản phẩm bán chạy"
+                   android:textStyle="bold"
+                   android:textSize="18sp"/>
+               <TextView
+                   android:id="@+id/tvShowMorePopular"
+                   android:gravity="end"
+                   android:layout_weight="1"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_marginRight="7dp"
+                   android:text="Hiển thị thêm"
+                   android:textSize="16sp"
+                   android:textColor="@color/orange_main">
+
+               </TextView>
+           </LinearLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recPopular"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"></androidx.recyclerview.widget.RecyclerView>
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_marginLeft="10dp"
+               android:layout_marginRight="10dp"
+               android:orientation="horizontal"
+               android:weightSum="2">
+
+               <TextView
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_weight="1"
+                   android:text="Khám phá"
+                   android:textStyle="bold"
+                   android:textSize="18sp"/>
+               <TextView
+                   android:id="@+id/tvShowMoreExplore"
+                   android:gravity="end"
+                   android:layout_weight="1"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_marginRight="7dp"
+                   android:text="Hiển thị thêm"
+                   android:textSize="16sp"
+                   android:textColor="@color/orange_main">
+
+               </TextView>
+           </LinearLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recExplore"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"></androidx.recyclerview.widget.RecyclerView>
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_marginLeft="10dp"
+               android:layout_marginRight="10dp"
+               android:orientation="horizontal"
+               android:weightSum="2">
+
+               <TextView
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_weight="1"
+                   android:text="Đề xuất"
+                   android:textStyle="bold"
+                   android:textSize="18sp"/>
+               <TextView
+                   android:id="@+id/tvShowMoreRecommend"
+                   android:gravity="end"
+                   android:layout_weight="1"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_marginRight="7dp"
+                   android:text="Hiển thị thêm"
+                   android:textSize="16sp"
+                   android:textColor="@color/orange_main">
+
+               </TextView>
+           </LinearLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recRecommend"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"></androidx.recyclerview.widget.RecyclerView>
        </LinearLayout>
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recPopular"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"></androidx.recyclerview.widget.RecyclerView>
-       <LinearLayout
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:layout_marginLeft="10dp"
-           android:layout_marginRight="10dp"
-           android:orientation="horizontal"
-           android:weightSum="2">
-
-           <TextView
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:layout_weight="1"
-               android:text="Khám phá"
-               android:textStyle="bold"
-               android:textSize="18sp"/>
-           <TextView
-               android:id="@+id/tvShowMoreExplore"
-               android:gravity="end"
-               android:layout_weight="1"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:layout_marginRight="7dp"
-               android:text="Hiển thị thêm"
-               android:textSize="16sp"
-               android:textColor="@color/orange_main">
-
-           </TextView>
-       </LinearLayout>
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recExplore"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"></androidx.recyclerview.widget.RecyclerView>
-       <LinearLayout
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:layout_marginLeft="10dp"
-           android:layout_marginRight="10dp"
-           android:orientation="horizontal"
-           android:weightSum="2">
-
-           <TextView
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:layout_weight="1"
-               android:text="Đề xuất"
-               android:textStyle="bold"
-               android:textSize="18sp"/>
-           <TextView
-               android:id="@+id/tvShowMoreRecommend"
-               android:gravity="end"
-               android:layout_weight="1"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:layout_marginRight="7dp"
-               android:text="Hiển thị thêm"
-               android:textSize="16sp"
-               android:textColor="@color/orange_main">
-
-           </TextView>
-       </LinearLayout>
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recRecommend"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"></androidx.recyclerview.widget.RecyclerView>
-   </LinearLayout>
-
-</ScrollView>
+ </ScrollView>
+</RelativeLayout>

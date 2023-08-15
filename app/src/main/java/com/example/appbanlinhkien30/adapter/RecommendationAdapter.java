@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -40,6 +41,7 @@ public class RecommendationAdapter extends RecyclerView.Adapter<RecommendationAd
         holder.name.setText(recommendationList.get(position).getName());
         holder.rating.setText(recommendationList.get(position).getRating());
         holder.price.setText(recommendationList.get(position).getPrice());
+        holder.ratingBar.setRating(Float.parseFloat(recommendationList.get(position).getRating()));
     }
 
     @Override
@@ -50,12 +52,14 @@ public class RecommendationAdapter extends RecyclerView.Adapter<RecommendationAd
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView recImg;
         TextView name, rating, price;
+        RatingBar ratingBar;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             recImg = itemView.findViewById(R.id.imgRecommend);
             name = itemView.findViewById(R.id.tvRecommendName);
             rating = itemView.findViewById(R.id.tvRecommendRating);
             price = itemView.findViewById(R.id.tvRecommendPrice);
+            ratingBar = itemView.findViewById(R.id.rtbarRecommend);
         }
     }
 }
