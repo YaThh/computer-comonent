@@ -28,4 +28,7 @@
     <string name="menu_logout">Đăng xuất</string>
     <string name="logging_in">Đang đăng nhập</string>
     <string name="logging_out">Đang đăng xuất</string>
+    <string name="your_name">Tên của bạn</string>
+    <string name="address">Địa chỉ</string>
+    <string name="update">Cập nhật</string>
 </resources>

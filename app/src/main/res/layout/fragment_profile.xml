@@ -1,22 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.ui.profile.ProfileFragment">
 
-    <TextView
-        android:id="@+id/text_gallery"
+    <ImageView
+        android:id="@+id/imgProfile"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="15dp"
+        android:src="@drawable/user" />
+
+    <EditText
+        android:id="@+id/edtProfileName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_below="@id/imgProfile"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="60dp"
+        android:background="@drawable/input"
+        android:drawableLeft="@drawable/person"
+        android:elevation="3dp"
+        android:hint="@string/your_name"
+        android:maxLines="1"
+        android:padding="13dp" />
+
+    <EditText
+        android:id="@+id/edtProfileEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edtProfileName"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="60dp"
+        android:background="@drawable/input"
+        android:drawableLeft="@drawable/email"
+        android:elevation="3dp"
+        android:hint="@string/email"
+        android:maxLines="1"
+        android:padding="13dp" />
+
+    <EditText
+        android:id="@+id/edtProfilePhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edtProfileEmail"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="60dp"
+        android:background="@drawable/input"
+        android:drawableLeft="@drawable/phone"
+        android:elevation="3dp"
+        android:hint="@string/phone_number"
+        android:maxLines="1"
+        android:padding="13dp" />
+
+    <EditText
+        android:id="@+id/edtProfileAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edtProfilePhone"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="60dp"
+        android:background="@drawable/input"
+        android:drawableLeft="@drawable/house"
+        android:elevation="3dp"
+        android:hint="@string/address"
+        android:maxLines="1"
+        android:padding="13dp" />
+
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button"
+        android:text="@string/update"
+        android:textStyle="bold"
+        android:layout_below="@+id/edtProfileAddress"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"/>
+</RelativeLayout>
