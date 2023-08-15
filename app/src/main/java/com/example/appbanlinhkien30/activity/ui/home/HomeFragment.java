@@ -1,26 +1,17 @@
 package com.example.appbanlinhkien30.activity.ui.home;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ProgressBar;
-import android.widget.ScrollView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.appbanlinhkien30.R;
-import com.example.appbanlinhkien30.activity.HomeActivity;
-import com.example.appbanlinhkien30.activity.MainActivity;
-import com.example.appbanlinhkien30.adapter.HomeAdapter;
+import com.example.appbanlinhkien30.adapter.HomeCategoryAdapter;
 import com.example.appbanlinhkien30.adapter.PopularAdapter;
 import com.example.appbanlinhkien30.adapter.RecommendationAdapter;
 import com.example.appbanlinhkien30.databinding.FragmentHomeBinding;
@@ -29,7 +20,6 @@ import com.example.appbanlinhkien30.model.Popular;
 import com.example.appbanlinhkien30.model.Recommendation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -45,7 +35,7 @@ public class HomeFragment extends Fragment {
     List<HomeCategory> homeCategoryList;
     List<Recommendation> recommendList;
     PopularAdapter popularAdapter;
-    HomeAdapter homeAdapter;
+    HomeCategoryAdapter homeCategoryAdapter;
     RecommendationAdapter recommendAdapter;
     RecyclerView popularRec, homeCateRec, recommendRec;
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -88,8 +78,8 @@ public class HomeFragment extends Fragment {
         homeCateRec = binding.recExplore;
         homeCateRec.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));
         homeCategoryList = new ArrayList<>();
-        homeAdapter = new HomeAdapter(getActivity(), homeCategoryList);
-        homeCateRec.setAdapter(homeAdapter);
+        homeCategoryAdapter = new HomeCategoryAdapter(getActivity(), homeCategoryList);
+        homeCateRec.setAdapter(homeCategoryAdapter);
 
         db.collection("HomeCategory").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -98,8 +88,10 @@ public class HomeFragment extends Fragment {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         HomeCategory category = document.toObject(HomeCategory.class);
                         homeCategoryList.add(category);
-                        homeAdapter.notifyDataSetChanged();
+                        homeCategoryAdapter.notifyDataSetChanged();
                     }
+                } else {
+                    Toast.makeText(getActivity(), "Error: " + task.getException(), Toast.LENGTH_SHORT).show();
                 }
             }
         });

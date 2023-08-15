@@ -31,4 +31,6 @@
     <string name="your_name">Tên của bạn</string>
     <string name="address">Địa chỉ</string>
     <string name="update">Cập nhật</string>
+    <string name="empty_cart">Giỏ hàng trống</string>
+    <string name="no_order">Bạn không có đơn hàng nào</string>
 </resources>
