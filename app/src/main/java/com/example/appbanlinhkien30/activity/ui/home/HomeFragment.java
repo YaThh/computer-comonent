@@ -1,5 +1,6 @@
 package com.example.appbanlinhkien30.activity.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,9 +9,14 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.appbanlinhkien30.R;
+import com.example.appbanlinhkien30.activity.ViewAllActivity;
+import com.example.appbanlinhkien30.activity.ui.category.CategoryFragment;
 import com.example.appbanlinhkien30.adapter.HomeCategoryAdapter;
 import com.example.appbanlinhkien30.adapter.PopularAdapter;
 import com.example.appbanlinhkien30.adapter.RecommendationAdapter;
@@ -93,6 +99,14 @@ public class HomeFragment extends Fragment {
                 } else {
                     Toast.makeText(getActivity(), "Error: " + task.getException(), Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        binding.tvShowMoreExplore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_main);
+                navController.navigate(R.id.action_home_category);
             }
         });
 
