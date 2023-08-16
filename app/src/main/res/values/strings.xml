@@ -33,4 +33,5 @@
     <string name="update">Cập nhật</string>
     <string name="empty_cart">Giỏ hàng trống</string>
     <string name="no_order">Bạn không có đơn hàng nào</string>
+    <string name="add_to_cart">Thêm vào giỏ</string>
 </resources>
