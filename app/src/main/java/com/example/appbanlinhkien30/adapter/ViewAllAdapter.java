@@ -1,6 +1,7 @@
 package com.example.appbanlinhkien30.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.appbanlinhkien30.R;
+import com.example.appbanlinhkien30.activity.ProductDetailActivity;
 import com.example.appbanlinhkien30.model.Product;
 
 import java.util.List;
@@ -41,6 +43,18 @@ public class ViewAllAdapter extends RecyclerView.Adapter<ViewAllAdapter.ViewHold
         holder.rating.setText(productList.get(position).getRating());
         holder.price.setText(productList.get(position).getPrice());
         holder.ratingBar.setRating(Float.parseFloat(productList.get(position).getRating()));
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int clickedPosition = holder.getAdapterPosition();
+                if (clickedPosition != RecyclerView.NO_POSITION) {
+                    Intent i = new Intent(context, ProductDetailActivity.class);
+                    i.putExtra("detail", productList.get(clickedPosition));
+                    context.startActivity(i);
+                }
+            }
+        });
     }
 
     @Override

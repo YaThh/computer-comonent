@@ -1,6 +1,8 @@
 package com.example.appbanlinhkien30.model;
 
-public class Product {
+import java.io.Serializable;
+
+public class Product implements Serializable {
     private String Name;
     private String Description;
     private String Type;
