@@ -1,8 +1,13 @@
 package com.example.appbanlinhkien30.activity.ui.cart;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,6 +18,7 @@ import android.view.ViewGroup;
 import com.example.appbanlinhkien30.adapter.CartAdapter;
 import com.example.appbanlinhkien30.databinding.FragmentCartBinding;
 import com.example.appbanlinhkien30.model.Cart;
+import com.example.appbanlinhkien30.util.Convert;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -45,6 +51,10 @@ public class CartFragment extends Fragment {
 
         db = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
+
+        LocalBroadcastManager.getInstance(getActivity())
+                .registerReceiver(mMessageReceiver, new IntentFilter("MyTotalAmount"));
+
         cartRec = binding.recCart;
         cartRec.setLayoutManager(new LinearLayoutManager(getActivity()));
         cartList = new ArrayList<>();
@@ -67,6 +77,14 @@ public class CartFragment extends Fragment {
 
         return root;
     }
+
+    public BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            double totalBill = intent.getDoubleExtra("totalAmount", 0);
+            binding.tvCartTotalPrice.setText("Tổng tiền: " + Convert.convertNumberToCurrencyString(totalBill));
+        }
+    };
     @Override
     public void onDestroyView() {
         super.onDestroyView();

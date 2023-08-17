@@ -1,12 +1,14 @@
 package com.example.appbanlinhkien30.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.appbanlinhkien30.R;
@@ -20,13 +22,14 @@ import java.util.List;
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 
     Context context;
+    List<Cart> cartList;
+    double overTotalPrice = 0;
 
     public CartAdapter(Context context, List<Cart> cartList) {
         this.context = context;
         this.cartList = cartList;
     }
 
-    List<Cart> cartList;
 
     @NonNull
     @Override
@@ -40,6 +43,12 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         holder.price.setText(cartList.get(position).getProductPrice());
         holder.quantity.setText(cartList.get(position).getTotalQuantity());
         holder.totalPrice.setText(cartList.get(position).getTotalPrice());
+
+        String totalPriceCurrency = Convert.convertCurrencyStringToNumber(cartList.get(position).getTotalPrice());
+        overTotalPrice = overTotalPrice + Double.parseDouble(totalPriceCurrency);
+        Intent i = new Intent("MyTotalAmount");
+        i.putExtra("totalAmount", overTotalPrice);
+        LocalBroadcastManager.getInstance(context).sendBroadcast(i);
     }
 
     @Override
