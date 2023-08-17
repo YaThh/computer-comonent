@@ -113,6 +113,7 @@ public class ProductDetailActivity extends AppCompatActivity {
     }
 
     private void addToCart() {
+
         String saveCurrentDate, saveCurrentTime;
         Calendar calendar = Calendar.getInstance();
 

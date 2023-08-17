@@ -34,4 +34,9 @@
     <string name="empty_cart">Giỏ hàng trống</string>
     <string name="no_order">Bạn không có đơn hàng nào</string>
     <string name="add_to_cart">Thêm vào giỏ</string>
+    <string name="buy_now">Mua ngay</string>
+    <string name="product_name">Tên sản phẩm</string>
+    <string name="price">Giá</string>
+    <string name="total_price">Tổng giá tiền</string>
+    <string name="quantity">Số lượng</string>
 </resources>
