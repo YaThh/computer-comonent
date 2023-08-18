@@ -2,9 +2,11 @@ package com.example.appbanlinhkien30.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,6 +16,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.appbanlinhkien30.R;
 import com.example.appbanlinhkien30.model.Cart;
 import com.example.appbanlinhkien30.util.Convert;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.w3c.dom.Text;
 
@@ -24,10 +31,14 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     Context context;
     List<Cart> cartList;
     double overTotalPrice = 0;
+    FirebaseFirestore db;
+    FirebaseAuth auth;
 
     public CartAdapter(Context context, List<Cart> cartList) {
         this.context = context;
         this.cartList = cartList;
+        db = FirebaseFirestore.getInstance();
+        auth = FirebaseAuth.getInstance();
     }
 
 
@@ -44,6 +55,28 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         holder.quantity.setText(cartList.get(position).getTotalQuantity());
         holder.totalPrice.setText(cartList.get(position).getTotalPrice());
 
+        holder.imgDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int clickedPostion = holder.getAdapterPosition();
+                if (clickedPostion != RecyclerView.NO_POSITION) {
+                    DocumentReference cartDocRef = db.collection("User").document(auth.getCurrentUser().getUid())
+                            .collection("Cart").document(cartList.get(clickedPostion).getId());
+                    cartDocRef.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                cartList.remove(cartList.get(clickedPostion));
+                                notifyDataSetChanged();
+                            }
+                        }
+                    });
+                }
+
+
+            }
+        });
+
         String totalPriceCurrency = Convert.convertCurrencyStringToNumber(cartList.get(position).getTotalPrice());
         overTotalPrice = overTotalPrice + Double.parseDouble(totalPriceCurrency);
         Intent i = new Intent("MyTotalAmount");
@@ -58,6 +91,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView name, price, quantity, totalPrice;
+        ImageView imgDelete;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -65,6 +99,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             price = itemView.findViewById(R.id.tvCartProductPrice);
             quantity = itemView.findViewById(R.id.tvCartProductQuantity);
             totalPrice = itemView.findViewById(R.id.tvCartProductTotalPrice);
+            imgDelete = itemView.findViewById(R.id.imgDelete);
         }
     }
 }

@@ -9,6 +9,7 @@ public class Cart implements Serializable {
     private String CurrentTime;
     private String TotalQuantity;
     private String TotalPrice;
+    private String Id;
     public Cart() {
     }
 
@@ -19,6 +20,14 @@ public class Cart implements Serializable {
         CurrentTime = currentTime;
         TotalQuantity = totalQuantity;
         TotalPrice = totalPrice;
+    }
+
+    public String getId() {
+        return Id;
+    }
+
+    public void setId(String id) {
+        Id = id;
     }
 
     public String getProductName() {

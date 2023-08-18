@@ -68,9 +68,22 @@ public class CartFragment extends Fragment {
                     @Override
                     public void onComplete(@androidx.annotation.NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
+                            cartList.clear();
                             for (DocumentSnapshot document : task.getResult().getDocuments()) {
+
+                                String documentId = document.getId();
+
                                 Cart cart = document.toObject(Cart.class);
+                                cart.setId(documentId);
                                 cartList.add(cart);
+                            }
+
+                            if (cartList.isEmpty()) {
+                                binding.cartRelative1.setVisibility(View.VISIBLE);
+                                binding.cartRelative2.setVisibility(View.GONE);
+                            } else {
+                                binding.cartRelative1.setVisibility(View.GONE);
+                                binding.cartRelative2.setVisibility(View.VISIBLE);
                                 cartAdapter.notifyDataSetChanged();
                             }
                         }
@@ -82,6 +95,7 @@ public class CartFragment extends Fragment {
                 Intent i = new Intent(getContext(), OrderActivity.class);
                 i.putExtra("itemList", (Serializable) cartList);
                 startActivity(i);
+
             }
         });
         return root;

@@ -102,7 +102,12 @@
                 android:textStyle="bold"
                 android:textSize="16sp"/>
         </LinearLayout>
-
+        
+        <ImageView
+            android:id="@+id/imgDelete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/delete"/>
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>
