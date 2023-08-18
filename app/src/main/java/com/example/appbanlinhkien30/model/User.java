@@ -6,6 +6,8 @@ public class User {
     private String Password;
     private int isAdmin;
 
+    private String profileImg;
+
     public User() {
     }
     public User(String phone, String email, String password, int isAdmin) {
@@ -47,4 +49,11 @@ public class User {
         this.isAdmin = isAdmin;
     }
 
+    public String getProfileImg() {
+        return profileImg;
+    }
+
+    public void setProfileImg(String profileImg) {
+        this.profileImg = profileImg;
+    }
 }
