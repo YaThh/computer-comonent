@@ -25,6 +25,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Map;
 
 public class ProductDetailActivity extends AppCompatActivity {
 
@@ -125,21 +126,28 @@ public class ProductDetailActivity extends AppCompatActivity {
 
         totalPrice = Double.parseDouble(Convert.convertCurrencyStringToNumber(product.getPrice()))  * totalQuantity;
 
-        final HashMap<String, Object> cartMap = new HashMap<>();
-        cartMap.put("ProductName", product.getName());
-        cartMap.put("ProductPrice", product.getPrice());
-        cartMap.put("CurrentDate", saveCurrentDate);
-        cartMap.put("CurrentTime", saveCurrentTime);
-        cartMap.put("TotalQuantity", quantity.getText());
-        cartMap.put("TotalPrice", Convert.convertNumberToCurrencyString(totalPrice));
+        DocumentReference cartDocRef = db.collection("User").document(auth.getCurrentUser().getUid())
+                .collection("Cart").document();
 
-        db.collection("Cart").document(auth.getCurrentUser().getUid())
-                .collection("User").add(cartMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentReference> task) {
-                        Toast.makeText(ProductDetailActivity.this, "Đã thêm vào giỏ hàng", Toast.LENGTH_SHORT).show();
-                        finish();
-                    }
-                });
-    }
+
+        Map<String, Object> cartItem = new HashMap<>();
+        cartItem.put("ProductName", product.getName());
+        cartItem.put("ProductPrice", product.getPrice());
+        cartItem.put("CurrentDate", saveCurrentDate);
+        cartItem.put("CurrentTime", saveCurrentTime);
+        cartItem.put("TotalQuantity", quantity.getText());
+        cartItem.put("TotalPrice", Convert.convertNumberToCurrencyString(totalPrice));
+
+        cartDocRef.set(cartItem).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    Toast.makeText(ProductDetailActivity.this, "Đã thêm vào giỏ hànhg", Toast.LENGTH_SHORT).show();
+                    finish();
+                } else {
+                    Toast.makeText(ProductDetailActivity.this, "Lỗi khi thêm vào giỏ hànhg", Toast.LENGTH_SHORT).show();
+                }
+            }
+            });
+        }
 }

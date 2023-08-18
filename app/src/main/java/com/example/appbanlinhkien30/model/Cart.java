@@ -1,6 +1,8 @@
 package com.example.appbanlinhkien30.model;
 
-public class Cart {
+import java.io.Serializable;
+
+public class Cart implements Serializable {
     private String ProductName;
     private String ProductPrice;
     private String CurrentDate;

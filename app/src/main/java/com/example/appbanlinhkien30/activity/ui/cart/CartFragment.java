@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.appbanlinhkien30.activity.OrderActivity;
 import com.example.appbanlinhkien30.adapter.CartAdapter;
 import com.example.appbanlinhkien30.databinding.FragmentCartBinding;
 import com.example.appbanlinhkien30.model.Cart;
@@ -29,6 +30,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,8 +63,8 @@ public class CartFragment extends Fragment {
         cartAdapter = new CartAdapter(getContext(), cartList);
         cartRec.setAdapter(cartAdapter);
 
-        db.collection("Cart").document(auth.getCurrentUser().getUid())
-                .collection("User").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        db.collection("User").document(auth.getCurrentUser().getUid())
+                .collection("Cart").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@androidx.annotation.NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
@@ -74,7 +76,14 @@ public class CartFragment extends Fragment {
                         }
                     }
                 });
-
+        binding.btnBuy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getContext(), OrderActivity.class);
+                i.putExtra("itemList", (Serializable) cartList);
+                startActivity(i);
+            }
+        });
         return root;
     }
 
@@ -88,6 +97,7 @@ public class CartFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        LocalBroadcastManager.getInstance(getActivity()).unregisterReceiver(mMessageReceiver);
         binding = null;
     }
 }
