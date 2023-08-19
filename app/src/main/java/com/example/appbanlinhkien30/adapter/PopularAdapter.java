@@ -1,6 +1,7 @@
 package com.example.appbanlinhkien30.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,16 +14,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.appbanlinhkien30.R;
-import com.example.appbanlinhkien30.model.Popular;
+import com.example.appbanlinhkien30.activity.ProductDetailActivity;
+import com.example.appbanlinhkien30.model.Product;
 
 import java.util.List;
 
 public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.ViewHolder> {
 
     private Context context;
-    private List<Popular> popularList;
+    private List<Product> popularList;
 
-    public PopularAdapter(Context context, List<Popular> popularList) {
+    public PopularAdapter(Context context, List<Product> popularList) {
         this.context = context;
         this.popularList = popularList;
     }
@@ -43,6 +45,18 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.ViewHold
         holder.rating.setText(popularList.get(position).getRating());
         holder.discount.setText(popularList.get(position).getDiscount());
         holder.ratingBar.setRating(Float.parseFloat(popularList.get(position).getRating()));
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int clickedPosition = holder.getAdapterPosition();
+                if (clickedPosition != RecyclerView.NO_POSITION) {
+                    Intent i = new Intent(context, ProductDetailActivity.class);
+                    i.putExtra("detail", popularList.get(clickedPosition));
+                    context.startActivity(i);
+                }
+            }
+        });
     }
 
     @Override

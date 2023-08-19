@@ -1,70 +1,29 @@
 package com.example.appbanlinhkien30.model;
 
-public class Popular {
-    private String Name;
-    private String Description;
-    private String Rating;
-    private String Discount;
-    private String Type;
-    private String ImgUrl;
+import java.io.Serializable;
 
-    public Popular() {
-    }
-
-    public Popular(String name, String description, String rating, String discount, String type, String imgUrl) {
-        Name = name;
-        Description = description;
-        Rating = rating;
-        Discount = discount;
-        Type = type;
-        ImgUrl = imgUrl;
-    }
-
-    public String getName() {
-        return Name;
-    }
-
-    public void setName(String name) {
-        Name = name;
-    }
-
-    public String getDescription() {
-        return Description;
-    }
-
-    public void setDescription(String description) {
-        Description = description;
-    }
-
-    public String getRating() {
-        return Rating;
-    }
-
-    public void setRating(String rating) {
-        Rating = rating;
-    }
-
-    public String getDiscount() {
-        return Discount;
-    }
-
-    public void setDiscount(String discount) {
-        Discount = discount;
-    }
-
-    public String getType() {
-        return Type;
-    }
-
-    public void setType(String type) {
-        Type = type;
-    }
-
-    public String getImgUrl() {
-        return ImgUrl;
-    }
-
-    public void setImgUrl(String imgUrl) {
-        ImgUrl = imgUrl;
-    }
-}
+//public class Popular extends Product {
+//
+//    private String discount;
+//
+//    public Popular() {
+//    }
+//
+//    public Popular(String discount) {
+//        this.discount = discount;
+//    }
+//
+//
+//
+//    public Popular(String name, String description, String type, String imgUrl, String price, String rating, String discount) {
+//        super(name, description, type, imgUrl, price, rating);
+//        this.discount = discount;
+//    }
+//    public String getDiscount() {
+//        return discount;
+//    }
+//
+//    public void setDiscount(String discount) {
+//        this.discount = discount;
+//    }
+//}

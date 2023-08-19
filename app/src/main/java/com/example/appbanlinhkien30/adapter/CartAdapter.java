@@ -58,15 +58,15 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         holder.imgDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int clickedPostion = holder.getAdapterPosition();
-                if (clickedPostion != RecyclerView.NO_POSITION) {
+                int clickedPosition = holder.getAdapterPosition();
+                if (clickedPosition != RecyclerView.NO_POSITION) {
                     DocumentReference cartDocRef = db.collection("User").document(auth.getCurrentUser().getUid())
-                            .collection("Cart").document(cartList.get(clickedPostion).getId());
+                            .collection("Cart").document(cartList.get(clickedPosition).getId());
                     cartDocRef.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
-                                cartList.remove(cartList.get(clickedPostion));
+                                cartList.remove(cartList.get(clickedPosition));
                                 notifyDataSetChanged();
                             }
                         }

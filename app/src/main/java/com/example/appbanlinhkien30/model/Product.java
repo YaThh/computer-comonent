@@ -9,6 +9,7 @@ public class Product implements Serializable {
     private String ImgUrl;
     private String Price;
     private String Rating;
+    private String Discount;
 
     public Product() {
     }
@@ -68,5 +69,13 @@ public class Product implements Serializable {
 
     public void setRating(String rating) {
         Rating = rating;
+    }
+
+    public String getDiscount() {
+        return Discount;
+    }
+
+    public void setDiscount(String discount) {
+        Discount = discount;
     }
 }

@@ -22,7 +22,7 @@ import com.example.appbanlinhkien30.adapter.PopularAdapter;
 import com.example.appbanlinhkien30.adapter.RecommendationAdapter;
 import com.example.appbanlinhkien30.databinding.FragmentHomeBinding;
 import com.example.appbanlinhkien30.model.HomeCategory;
-import com.example.appbanlinhkien30.model.Popular;
+import com.example.appbanlinhkien30.model.Product;
 import com.example.appbanlinhkien30.model.Recommendation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -37,7 +37,7 @@ public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
 
     FirebaseFirestore db;
-    List<Popular> popularList;
+    List<Product> popularList;
     List<HomeCategory> homeCategoryList;
     List<Recommendation> recommendList;
     PopularAdapter popularAdapter;
@@ -61,12 +61,12 @@ public class HomeFragment extends Fragment {
         popularAdapter = new PopularAdapter(getActivity(), popularList);
         popularRec.setAdapter(popularAdapter);
 
-        db.collection("PopularProduct").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        db.collection("Product").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
-                        Popular popularProduct = document.toObject(Popular.class);
+                        Product popularProduct = document.toObject(Product.class);
                         popularList.add(popularProduct);
                         popularAdapter.notifyDataSetChanged();
 
