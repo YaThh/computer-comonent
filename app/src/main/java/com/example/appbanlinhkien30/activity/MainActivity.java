@@ -123,15 +123,21 @@ public class MainActivity extends AppCompatActivity implements ProfileUpdateList
                 || super.onSupportNavigateUp();
     }
 
-    @Override
-    public void onProfileUpdated(String profileImageUrl, String userName) {
 
+
+    @Override
+    public void onProfileNameUpdated(String userName) {
+        NavigationView navigationView = binding.navView;
+        View headerView = navigationView.getHeaderView(0);
+        TextView headerName = headerView.findViewById(R.id.tvNavUsername);
+        headerName.setText(userName);
+    }
+
+    @Override
+    public void onProfieImageUpdated(String profileImageUrl) {
         NavigationView navigationView = binding.navView;
         View headerView = navigationView.getHeaderView(0);
         CircleImageView headerImg = headerView.findViewById(R.id.imgNavProfile);
-        TextView headerName = headerView.findViewById(R.id.tvNavUsername);
-
         Glide.with(MainActivity.this).load(profileImageUrl).into(headerImg);
-        headerName.setText(userName);
     }
 }

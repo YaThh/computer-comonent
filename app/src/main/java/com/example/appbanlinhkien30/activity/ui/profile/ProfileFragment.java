@@ -92,6 +92,8 @@ public class ProfileFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 db.getReference().child("User").child(FirebaseAuth.getInstance().getUid())
                                         .child("profileImg").setValue(uri.toString());
+
+                                profileUpdateListener.onProfieImageUpdated(uri.toString());
                             }
                         });
                     }
@@ -118,7 +120,6 @@ public class ProfileFragment extends Fragment {
         String uid = FirebaseAuth.getInstance().getUid();
 
         String newName = binding.edtProfileName.getText().toString();
-//        String newEmail = binding.edtProfileEmail.getText().toString();
         String newPhone = binding.edtProfilePhone.getText().toString();
         String newAddress = binding.edtProfileAddress.getText().toString();
 
@@ -148,27 +149,14 @@ public class ProfileFragment extends Fragment {
                     profileUpdate.put("address", user.getAddress());
                 }
 
-//                if (!newEmail.isEmpty() && !newEmail.equals(user.getEmail())) {
-//                    FirebaseUser fUser = FirebaseAuth.getInstance().getCurrentUser();
-//                    fUser.updateEmail(newEmail).addOnSuccessListener(new OnSuccessListener<Void>() {
-//                        @Override
-//                        public void onSuccess(Void unused) {
-//                            profileUpdate.put("email", newEmail);
-//
-//                        }
-//                    }).addOnFailureListener(new OnFailureListener() {
-//                        @Override
-//                        public void onFailure(@NonNull Exception e) {
-//                            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-//                        }
-//                    });
-//                } else {
-//                    profileUpdate.put("email", user.getEmail());
-//                }
+
                 userRef.updateChildren(profileUpdate).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
                         Toast.makeText(getContext(), "Cập nhật thành công", Toast.LENGTH_SHORT).show();
+                        if (profileUpdateListener != null) {
+                            profileUpdateListener.onProfileNameUpdated(newName);
+                        }
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
