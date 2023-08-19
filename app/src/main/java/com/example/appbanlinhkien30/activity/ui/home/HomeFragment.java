@@ -2,9 +2,12 @@ package com.example.appbanlinhkien30.activity.ui.home;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,12 +23,14 @@ import com.example.appbanlinhkien30.activity.ui.category.CategoryFragment;
 import com.example.appbanlinhkien30.adapter.HomeCategoryAdapter;
 import com.example.appbanlinhkien30.adapter.PopularAdapter;
 import com.example.appbanlinhkien30.adapter.RecommendationAdapter;
+import com.example.appbanlinhkien30.adapter.ViewAllAdapter;
 import com.example.appbanlinhkien30.databinding.FragmentHomeBinding;
 import com.example.appbanlinhkien30.model.HomeCategory;
 import com.example.appbanlinhkien30.model.Product;
 import com.example.appbanlinhkien30.model.Recommendation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -44,6 +49,11 @@ public class HomeFragment extends Fragment {
     HomeCategoryAdapter homeCategoryAdapter;
     RecommendationAdapter recommendAdapter;
     RecyclerView popularRec, homeCateRec, recommendRec;
+
+    private List<Product> productList;
+    private RecyclerView searchRec;
+    private ViewAllAdapter viewAllAdapter;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
@@ -53,6 +63,7 @@ public class HomeFragment extends Fragment {
 
         binding.pBarHome.setVisibility(View.VISIBLE);
         binding.svHome.setVisibility(View.GONE);
+
 
         //San pham noi bat
         popularRec = binding.recPopular;
@@ -132,8 +143,61 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        //Tim san pham
+        searchRec = binding.recSearch;
+        productList = new ArrayList<>();
+        viewAllAdapter = new ViewAllAdapter(getContext(), productList);
+        searchRec.setLayoutManager(new LinearLayoutManager(getContext()));
+        searchRec.setAdapter(viewAllAdapter);
+        searchRec.setHasFixedSize(true);
+        binding.edtSearchBox.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String input = editable.toString().trim();
+                productList.clear();
+                if (!input.isEmpty()) {
+                    searchProduct(input);
+                }
+            }
+        });
+
+
         return root;
     }
+
+    private void searchProduct(String input) {
+        if (!input.isEmpty()) {
+            db.collection("Product")
+                    .whereGreaterThanOrEqualTo("Name", input)
+                    .whereLessThanOrEqualTo("Name", input + "\uf8ff")
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful() && task.getResult() != null) {
+                                productList.clear();
+                                viewAllAdapter.notifyDataSetChanged();
+                                for (DocumentSnapshot document :task.getResult().getDocuments()) {
+                                    Product product = document.toObject(Product.class);
+                                    productList.add(product);
+                                    viewAllAdapter.notifyDataSetChanged();
+                                }
+                            }
+                        }
+                    });
+        }
+    }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
