@@ -1,5 +1,6 @@
 package com.example.appbanlinhkien30.activity.ui.profile;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -44,6 +45,7 @@ import java.util.Map;
 public class ProfileFragment extends Fragment {
 
     private FragmentProfileBinding binding;
+    ProfileUpdateListener profileUpdateListener;
     ActivityResultLauncher<String> imgPickerLauncher;
     FirebaseStorage storage;
     FirebaseAuth auth;
@@ -183,6 +185,21 @@ public class ProfileFragment extends Fragment {
         });
     }
 
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if (context instanceof ProfileUpdateListener) {
+            profileUpdateListener = (ProfileUpdateListener) context;
+        } else {
+            throw new RuntimeException(context.toString() + "must implement ProfileUpdate Listener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        profileUpdateListener = null;
+    }
 
     @Override
     public void onDestroyView() {

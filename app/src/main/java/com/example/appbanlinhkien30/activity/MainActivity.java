@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.appbanlinhkien30.R;
+import com.example.appbanlinhkien30.activity.ui.profile.ProfileUpdateListener;
 import com.example.appbanlinhkien30.model.User;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
@@ -31,7 +32,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ProfileUpdateListener {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
@@ -120,5 +121,17 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    @Override
+    public void onProfileUpdated(String profileImageUrl, String userName) {
+
+        NavigationView navigationView = binding.navView;
+        View headerView = navigationView.getHeaderView(0);
+        CircleImageView headerImg = headerView.findViewById(R.id.imgNavProfile);
+        TextView headerName = headerView.findViewById(R.id.tvNavUsername);
+
+        Glide.with(MainActivity.this).load(profileImageUrl).into(headerImg);
+        headerName.setText(userName);
     }
 }
