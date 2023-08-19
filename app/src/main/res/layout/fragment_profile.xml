@@ -28,26 +28,26 @@
         android:maxLines="1"
         android:padding="13dp" />
 
-    <EditText
-        android:id="@+id/edtProfileEmail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/edtProfileName"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="60dp"
-        android:background="@drawable/input"
-        android:drawableLeft="@drawable/email"
-        android:elevation="3dp"
-        android:hint="@string/email"
-        android:maxLines="1"
-        android:padding="13dp" />
+<!--    <EditText-->
+<!--        android:id="@+id/edtProfileEmail"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@id/edtProfileName"-->
+<!--        android:layout_marginStart="60dp"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:layout_marginEnd="60dp"-->
+<!--        android:background="@drawable/input"-->
+<!--        android:drawableLeft="@drawable/email"-->
+<!--        android:elevation="3dp"-->
+<!--        android:hint="@string/email"-->
+<!--        android:maxLines="1"-->
+<!--        android:padding="13dp" />-->
 
     <EditText
         android:id="@+id/edtProfilePhone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/edtProfileEmail"
+        android:layout_below="@id/edtProfileName"
         android:layout_marginStart="60dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="60dp"

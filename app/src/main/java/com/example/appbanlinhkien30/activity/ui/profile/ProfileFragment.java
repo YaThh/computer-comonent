@@ -20,8 +20,13 @@ import com.bumptech.glide.Glide;
 import com.example.appbanlinhkien30.R;
 import com.example.appbanlinhkien30.databinding.FragmentProfileBinding;
 import com.example.appbanlinhkien30.model.User;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,6 +36,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class ProfileFragment extends Fragment {
 
@@ -104,7 +113,74 @@ public class ProfileFragment extends Fragment {
     }
 
     private void updateUserProfile() {
+        String uid = FirebaseAuth.getInstance().getUid();
 
+        String newName = binding.edtProfileName.getText().toString();
+//        String newEmail = binding.edtProfileEmail.getText().toString();
+        String newPhone = binding.edtProfilePhone.getText().toString();
+        String newAddress = binding.edtProfileAddress.getText().toString();
+
+        DatabaseReference userRef = db.getReference().child("User").child(uid);
+        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                User user = snapshot.getValue(User.class);
+
+                Map<String, Object> profileUpdate = new HashMap<>();
+
+                if (!newName.isEmpty()) {
+                    profileUpdate.put("userName", newName);
+                } else {
+                    profileUpdate.put("username", user.getUserName());
+                }
+
+                if (!newPhone.isEmpty()) {
+                    profileUpdate.put("phone", newPhone);
+                } else {
+                    profileUpdate.put("phone", user.getPhone());
+                }
+
+                if (!newAddress.isEmpty()) {
+                    profileUpdate.put("address", newAddress);
+                } else {
+                    profileUpdate.put("address", user.getAddress());
+                }
+
+//                if (!newEmail.isEmpty() && !newEmail.equals(user.getEmail())) {
+//                    FirebaseUser fUser = FirebaseAuth.getInstance().getCurrentUser();
+//                    fUser.updateEmail(newEmail).addOnSuccessListener(new OnSuccessListener<Void>() {
+//                        @Override
+//                        public void onSuccess(Void unused) {
+//                            profileUpdate.put("email", newEmail);
+//
+//                        }
+//                    }).addOnFailureListener(new OnFailureListener() {
+//                        @Override
+//                        public void onFailure(@NonNull Exception e) {
+//                            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+//                        }
+//                    });
+//                } else {
+//                    profileUpdate.put("email", user.getEmail());
+//                }
+                userRef.updateChildren(profileUpdate).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Toast.makeText(getContext(), "Cập nhật thành công", Toast.LENGTH_SHORT).show();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getContext(), "Cập nhật không thành công", Toast.LENGTH_SHORT).show();
+                        }
+                });
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
 

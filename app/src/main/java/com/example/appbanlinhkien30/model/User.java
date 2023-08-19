@@ -7,9 +7,13 @@ public class User {
     private int isAdmin;
 
     private String profileImg;
+    private String userName;
+
+    private String address;
 
     public User() {
     }
+
     public User(String phone, String email, String password, int isAdmin) {
         Phone = phone;
         Email = email;
@@ -55,5 +59,21 @@ public class User {
 
     public void setProfileImg(String profileImg) {
         this.profileImg = profileImg;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }
