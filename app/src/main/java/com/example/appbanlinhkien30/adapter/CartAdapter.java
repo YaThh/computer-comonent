@@ -62,6 +62,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             public void onClick(View view) {
                 int clickedPosition = holder.getAdapterPosition();
                 if (clickedPosition != RecyclerView.NO_POSITION) {
+                    double deletedItemPrice = Double.parseDouble(Convert.convertCurrencyStringToNumber(
+                            cartList.get(clickedPosition).getTotalPrice()));
+                    overTotalPrice -= deletedItemPrice;
+
                     DocumentReference cartDocRef = db.collection("User").document(auth.getCurrentUser().getUid())
                             .collection("Cart").document(cartList.get(clickedPosition).getId());
                     cartDocRef.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -70,6 +74,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
                             if (task.isSuccessful()) {
                                 cartList.remove(cartList.get(clickedPosition));
                                 notifyDataSetChanged();
+
+                                //Cap nhat gia sau khi xoa khoi gio hang
+                                Intent i = new Intent("MyTotalAmount");
+                                i.putExtra("totalAmount", overTotalPrice);
+                                LocalBroadcastManager.getInstance(context).sendBroadcast(i);
                             }
                         }
                     });
