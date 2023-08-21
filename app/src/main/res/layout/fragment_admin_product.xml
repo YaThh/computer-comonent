@@ -10,6 +10,43 @@
         android:layout_height="match_parent">
 
         <Button
+            android:id="@+id/btnAdminProductAdd"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_add"
+            android:text="@string/add"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="40dp"/>
+
+        <Button
+            android:id="@+id/btnAdminProductDel"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_del"
+            android:text="@string/delete"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnAdminProductAdd"
+            android:layout_marginTop="40dp"/>
+        <Button
+            android:id="@+id/btnAdminProductModify"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_modify"
+            android:text="@string/modify"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnAdminProductDel"
+            android:layout_marginTop="40dp"/>
+        <Button
             android:id="@+id/btnAdminProductBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
