@@ -39,4 +39,9 @@
     <string name="price">Giá</string>
     <string name="total_price">Tổng giá tiền</string>
     <string name="quantity">Số lượng</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="back">Quay lại</string>
+    <string name="delete">Xoá</string>
+    <string name="modify">Sửa</string>
 </resources>

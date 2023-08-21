@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.ui.admin.AdminUserDelFragment">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <EditText
+            android:id="@+id/edtAdminUserDel"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/input"
+            android:hint="Nhập email người dùng muốn xoá"
+            android:padding="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btnAdminUserDel"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/button_del"
+            android:text="Xoá"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edtAdminUserDel" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</FrameLayout>
