@@ -23,6 +23,7 @@ import com.example.appbanlinhkien30.util.Convert;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -32,6 +33,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 
@@ -92,6 +94,8 @@ public class CartFragment extends Fragment {
         binding.btnBuy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                deleteAllCart(); 
+
                 Intent i = new Intent(getContext(), OrderActivity.class);
                 i.putExtra("itemList", (Serializable) cartList);
                 startActivity(i);
@@ -99,6 +103,23 @@ public class CartFragment extends Fragment {
             }
         });
         return root;
+    }
+
+    private void deleteAllCart() {
+        CollectionReference cartCollectionRef = db.collection("User")
+                .document(auth.getCurrentUser().getUid())
+                .collection("Cart");
+
+        cartCollectionRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@androidx.annotation.NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (DocumentSnapshot document : task.getResult().getDocuments()) {
+                        document.getReference().delete();
+                    }
+                }
+            }
+        });
     }
 
     public BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
