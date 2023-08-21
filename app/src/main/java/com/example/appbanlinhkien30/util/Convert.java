@@ -1,7 +1,9 @@
 package com.example.appbanlinhkien30.util;
 
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.Currency;
+import java.util.Date;
 import java.util.Locale;
 
 public class Convert {
@@ -21,5 +23,10 @@ public class Convert {
             currencyFormat.setCurrency(currency);
 
             return currencyFormat.format(numericValue);
+    }
+
+    public static String formatDate(Date date) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault());
+        return dateFormat.format(date);
     }
 }

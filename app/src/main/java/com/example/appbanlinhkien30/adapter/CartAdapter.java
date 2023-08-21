@@ -6,6 +6,7 @@ import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,6 +21,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.w3c.dom.Text;
@@ -77,6 +79,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             }
         });
 
+
+
+
         String totalPriceCurrency = Convert.convertCurrencyStringToNumber(cartList.get(position).getTotalPrice());
         overTotalPrice = overTotalPrice + Double.parseDouble(totalPriceCurrency);
         Intent i = new Intent("MyTotalAmount");
@@ -92,6 +97,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView name, price, quantity, totalPrice;
         ImageView imgDelete;
+        Button buy;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -100,6 +106,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             quantity = itemView.findViewById(R.id.tvCartProductQuantity);
             totalPrice = itemView.findViewById(R.id.tvCartProductTotalPrice);
             imgDelete = itemView.findViewById(R.id.imgDelete);
+            buy = itemView.findViewById(R.id.btnBuy);
         }
     }
 }

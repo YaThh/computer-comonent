@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.example.appbanlinhkien30.R;
 import com.example.appbanlinhkien30.model.Cart;
+import com.example.appbanlinhkien30.model.Order;
 import com.example.appbanlinhkien30.util.Convert;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -19,9 +20,11 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 public class OrderActivity extends AppCompatActivity {
 
@@ -41,40 +44,25 @@ public class OrderActivity extends AppCompatActivity {
         List<Cart> cartList = (List<Cart>) getIntent().getSerializableExtra("itemList");
 
         if (cartList != null && cartList.size() > 0) {
-            //Tao order document moi
-            DocumentReference orderDocRef = db.collection("Order").document();
 
-            //Tao map de chua thong tin order
-            Map<String, Object> orderData = new HashMap<>();
-            orderData.put("UserId", auth.getCurrentUser().getUid());
+            Order newOrder = new Order();
+            newOrder.setPurchaseDate(new Date());
+            newOrder.setCartList(cartList);
+            newOrder.setUserId(auth.getCurrentUser().getUid());
 
-            //Tao mang de chua tung cart
-            List<Map<String, Object>> cartItemList = new ArrayList<>();
-            for (Cart cart : cartList) {
-                Map<String, Object> cartItem = new HashMap<>();
-                cartItem.put("ProductName", cart.getProductName());
-                cartItem.put("ProductPrice", cart.getProductPrice());
-                cartItem.put("CurrentDate", cart.getCurrentDate());
-                cartItem.put("CurrentTime", cart.getCurrentTime());
-                cartItem.put("TotalQuantity", cart.getTotalQuantity());
-                cartItem.put("TotalPrice", cart.getTotalPrice());
-
-                cartItemList.add(cartItem);
-
+            db.collection("Order").document()
+                    .set(newOrder)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(OrderActivity.this, "Đặt hàng thành công", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(OrderActivity.this, "Đặt hàng không thành công", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
             }
-
-            orderData.put("CartItem", cartItemList);
-            orderDocRef.set(orderData).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    if (task.isSuccessful()) {
-                        Toast.makeText(OrderActivity.this, "Đặt hàng thành công", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(OrderActivity.this, "Đặt hàng không thành công", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
-        }
 
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,5 +71,8 @@ public class OrderActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        }
+
+
     }
-}
