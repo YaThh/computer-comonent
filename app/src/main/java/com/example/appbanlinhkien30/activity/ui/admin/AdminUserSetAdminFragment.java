@@ -83,6 +83,47 @@ public class AdminUserSetAdminFragment extends Fragment {
                 }
                 }
         });
+
+        binding.btnAdminUserDesetAdmin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String email = binding.edtAdminUserSetAdmin.getText().toString();
+                if (!email.isEmpty()) {
+                    DatabaseReference userRef = db.getReference("User");
+                    Query query = userRef.orderByChild("email").equalTo(email);
+
+                    query.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if (snapshot.exists()) {
+                                //Lay user ref dau tien co email trong query
+                                DataSnapshot userSnapshot = snapshot.getChildren().iterator().next();
+
+                                userSnapshot.getRef().child("isAdmin").setValue(0);
+                                Toast.makeText(requireContext(), "Người dùng đã không còn là admin", Toast.LENGTH_SHORT).show();
+                            } else {
+
+                                Toast.makeText(requireContext(), "Không tìm thấy người dùng", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+            } else {
+                    Toast.makeText(requireContext(), "Chưa nhập email", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        binding.btnAdminUserSetAdminBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().getSupportFragmentManager().popBackStack();
+            }
+        });
         return root;
     }
 }

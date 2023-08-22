@@ -47,4 +47,5 @@
     <string name="add">Thêm</string>
     <string name="set_admin">Set Admin</string>
     <string name="provide_email">Nhập email người dùng</string>
+    <string name="deset_admin">Bỏ set admin</string>
 </resources>

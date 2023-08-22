@@ -82,6 +82,14 @@ public class AdminUserDelFragment extends Fragment {
                 }
             }
         });
+
+
+        binding.btnAdminUserDelBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().getSupportFragmentManager().popBackStack();
+            }
+        });
         return root;
     }
 }
