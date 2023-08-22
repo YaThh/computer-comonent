@@ -1,5 +1,6 @@
 package com.example.appbanlinhkien30.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -10,11 +11,16 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.appbanlinhkien30.R;
 import com.example.appbanlinhkien30.activity.ProductDetailActivity;
+import com.example.appbanlinhkien30.activity.ui.admin.AdminProductDelFragment;
+import com.example.appbanlinhkien30.activity.ui.home.HomeFragment;
 import com.example.appbanlinhkien30.model.Product;
 
 import java.util.List;
@@ -49,9 +55,25 @@ public class ViewAllAdapter extends RecyclerView.Adapter<ViewAllAdapter.ViewHold
             public void onClick(View view) {
                 int clickedPosition = holder.getAdapterPosition();
                 if (clickedPosition != RecyclerView.NO_POSITION) {
-                    Intent i = new Intent(context, ProductDetailActivity.class);
-                    i.putExtra("detail", productList.get(clickedPosition));
-                    context.startActivity(i);
+                    Product clickedProduct = productList.get(clickedPosition);
+
+                    //Kiem tra context co phai la instance cua activity
+                    if (context instanceof FragmentActivity) {
+                        FragmentActivity fragmentActivity = (FragmentActivity) context;
+
+                        //Kiem tra AdminProductDelFragment
+                        FragmentManager fragmentManager = fragmentActivity.getSupportFragmentManager();
+                        Fragment currentFragment = fragmentManager.findFragmentById(R.id.fragContainer);
+                        if (currentFragment instanceof AdminProductDelFragment) {
+                            AdminProductDelFragment adminProductDelFragment = (AdminProductDelFragment) currentFragment;
+                            adminProductDelFragment.setEditText(clickedProduct.getName());
+                        } else {
+                            Intent i = new Intent(context, ProductDetailActivity.class);
+                            i.putExtra("detail", productList.get(clickedPosition));
+                            context.startActivity(i);
+                        }
+
+                    }
                 }
             }
         });
@@ -76,4 +98,5 @@ public class ViewAllAdapter extends RecyclerView.Adapter<ViewAllAdapter.ViewHold
             ratingBar = itemView.findViewById(R.id.rbarViewAll);
         }
     }
+
 }

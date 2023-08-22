@@ -58,7 +58,6 @@ public class AdminUserDelFragment extends Fragment {
                 String email = binding.edtAdminUserDel.getText().toString();
 
                 if (!email.isEmpty()) {
-                    //Lay uid dua vao email
                     DatabaseReference userRef = db.getReference("User");
                     Query query = userRef.orderByChild("email").equalTo(email);
 

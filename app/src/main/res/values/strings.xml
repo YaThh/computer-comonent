@@ -51,4 +51,5 @@
     <string name="product_type">Loại sản phẩm</string>
     <string name="product_price">Giá sản phẩm</string>
     <string name="product_description">Mô tả</string>
+    <string name="provide_product_name">Nhập tên sản phẩm</string>
 </resources>

@@ -43,12 +43,20 @@ public class AdminProductFragment extends Fragment {
                 Switch.switchFragment(getParentFragmentManager(), new AdminProductAddFragment());
             }
         });
+
+        binding.btnAdminProductDel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Switch.switchFragment(getParentFragmentManager(), new AdminProductDelFragment());
+            }
+        });
         binding.btnAdminProductBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 getActivity().getSupportFragmentManager().popBackStack();
             }
         });
+
         return root;
     }
 }

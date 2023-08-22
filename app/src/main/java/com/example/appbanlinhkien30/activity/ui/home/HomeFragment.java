@@ -178,8 +178,8 @@ public class HomeFragment extends Fragment {
     private void searchProduct(String input) {
         if (!input.isEmpty()) {
             db.collection("Product")
-                    .whereGreaterThanOrEqualTo("Name", input)
-                    .whereLessThanOrEqualTo("Name", input + "\uf8ff")
+                    .whereGreaterThanOrEqualTo("name", input)
+                    .whereLessThanOrEqualTo("name", input + "\uf8ff")
                     .get()
                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
@@ -197,6 +197,7 @@ public class HomeFragment extends Fragment {
                     });
         }
     }
+
 
     @Override
     public void onDestroyView() {
