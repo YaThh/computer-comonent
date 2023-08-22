@@ -55,7 +55,7 @@ public class ViewAllActivity extends AppCompatActivity {
 
         //Lay VGA
         if (type != null && type.equalsIgnoreCase("VGA")) {
-            db.collection("Product").whereEqualTo("Type", "VGA")
+            db.collection("Product").whereEqualTo("type", "VGA")
                     .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -70,7 +70,7 @@ public class ViewAllActivity extends AppCompatActivity {
 
           //Lay case
         if (type != null && type.equalsIgnoreCase("Case")) {
-            db.collection("Product").whereEqualTo("Type", "Case")
+            db.collection("Product").whereEqualTo("type", "Case")
                     .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -85,7 +85,7 @@ public class ViewAllActivity extends AppCompatActivity {
 
           //Lay RAM
         if (type != null && type.equalsIgnoreCase("RAM")) {
-            db.collection("Product").whereEqualTo("Type", "RAM")
+            db.collection("Product").whereEqualTo("type", "RAM")
                     .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -100,7 +100,7 @@ public class ViewAllActivity extends AppCompatActivity {
 
         //Lay CPU
         if (type != null && type.equalsIgnoreCase("CPU")) {
-            db.collection("Product").whereEqualTo("Type", "CPU")
+            db.collection("Product").whereEqualTo("type", "CPU")
                     .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -115,7 +115,7 @@ public class ViewAllActivity extends AppCompatActivity {
 
         //Lay HDD
         if (type != null && type.equalsIgnoreCase("HDD")) {
-            db.collection("Product").whereEqualTo("Type", "HDD")
+            db.collection("Product").whereEqualTo("type", "HDD")
                     .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -130,7 +130,7 @@ public class ViewAllActivity extends AppCompatActivity {
 
         //Lay SSD
         if (type != null && type.equalsIgnoreCase("SSD")) {
-            db.collection("Product").whereEqualTo("Type", "SSD")
+            db.collection("Product").whereEqualTo("type", "SSD")
                     .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -145,7 +145,7 @@ public class ViewAllActivity extends AppCompatActivity {
 
         //Lay PSU
         if (type != null && type.equalsIgnoreCase("PSU")) {
-            db.collection("Product").whereEqualTo("Type", "PSU")
+            db.collection("Product").whereEqualTo("type", "PSU")
                     .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -160,7 +160,7 @@ public class ViewAllActivity extends AppCompatActivity {
 
         //Lay mainboard
         if (type != null && type.equalsIgnoreCase("Mainboard")) {
-            db.collection("Product").whereEqualTo("Type", "Mainboard")
+            db.collection("Product").whereEqualTo("type", "Mainboard")
                     .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -175,7 +175,7 @@ public class ViewAllActivity extends AppCompatActivity {
 
         //Lay cooler
         if (type != null && type.equalsIgnoreCase("Cooler")) {
-            db.collection("Product").whereEqualTo("Type", "Cooler")
+            db.collection("Product").whereEqualTo("type", "Cooler")
                     .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<QuerySnapshot> task) {

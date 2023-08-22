@@ -101,36 +101,49 @@ public class AdminProductAddFragment extends Fragment {
             public void onClick(View view) {
 
                 String name = binding.edtAdminProductName.getText().toString();
-                Double price = Double.parseDouble(binding.edtAdminProductPrice.getText().toString());
+                String priceText = binding.edtAdminProductPrice.getText().toString();
+                Double price = priceText.isEmpty() ? 0 : Double.parseDouble(priceText);
                 String description = binding.edtAdminProductDescription.getText().toString();
                 String type = binding.edtAdminProductType.getText().toString();
 
-                Product product = new Product();
-                product.setName(name);
-                product.setPrice(Convert.convertNumberToCurrencyString(price));
-                product.setDescription(description);
-                product.setType(type);
-                product.setImgUrl(imgUrl[0]);
-                product.setRating("0");
+                if (!name.isEmpty() && !description.isEmpty() && !type.isEmpty() && !String.valueOf(price).isEmpty()) {
+                    Product product = new Product();
+                    product.setName(name);
+                    product.setPrice(Convert.convertNumberToCurrencyString(price));
+                    product.setDescription(description);
+                    product.setType(type);
+                    product.setImgUrl(imgUrl[0]);
+                    product.setRating("0");
 
-                db.collection("Product").add(product).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Toast.makeText(requireContext(), "Thêm sản phẩm thành công", Toast.LENGTH_SHORT).show();
-                        binding.edtAdminProductName.setText("");
-                        binding.edtAdminProductPrice.setText("");
-                        binding.edtAdminProductType.setText("");
-                        binding.edtAdminProductDescription.setText("");
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(requireContext(), "Thêm sản phẩm không thành công", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                    db.collection("Product").add(product).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                        @Override
+                        public void onSuccess(DocumentReference documentReference) {
+                            Toast.makeText(requireContext(), "Thêm sản phẩm thành công", Toast.LENGTH_SHORT).show();
+                            binding.edtAdminProductName.setText("");
+                            binding.edtAdminProductPrice.setText("");
+                            binding.edtAdminProductType.setText("");
+                            binding.edtAdminProductDescription.setText("");
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(requireContext(), "Thêm sản phẩm không thành công", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                } else {
+                    Toast.makeText(requireContext(), "Vui lòng nhập đủ các field trống", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 
+
+        binding.btnAdminProductAddBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().getSupportFragmentManager().popBackStack();
+            }
+        });
         return root;
     }
 }
