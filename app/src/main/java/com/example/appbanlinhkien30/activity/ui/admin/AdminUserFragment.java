@@ -49,6 +49,12 @@ public class AdminUserFragment extends Fragment {
             }
         });
 
+        binding.btnUserSetAdmin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Switch.switchFragment(getParentFragmentManager(), new AdminUserSetAdminFragment());
+            }
+        });
         return root;
     }
 
