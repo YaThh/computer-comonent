@@ -149,7 +149,7 @@ public class ProductDetailActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
-                    Toast.makeText(ProductDetailActivity.this, "Đã thêm vào giỏ hànhg", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ProductDetailActivity.this, "Đã thêm vào giỏ hàng", Toast.LENGTH_SHORT).show();
                     finish();
                 } else {
                     Toast.makeText(ProductDetailActivity.this, "Lỗi khi thêm vào giỏ hànhg", Toast.LENGTH_SHORT).show();
