@@ -48,4 +48,7 @@
     <string name="set_admin">Set Admin</string>
     <string name="provide_email">Nhập email người dùng</string>
     <string name="deset_admin">Bỏ set admin</string>
+    <string name="product_type">Loại sản phẩm</string>
+    <string name="product_price">Giá sản phẩm</string>
+    <string name="product_description">Mô tả</string>
 </resources>
