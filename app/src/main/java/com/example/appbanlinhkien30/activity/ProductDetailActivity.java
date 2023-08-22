@@ -34,7 +34,7 @@ import java.util.Map;
 public class ProductDetailActivity extends AppCompatActivity {
 
     ImageView imgDetail;
-    TextView price, rating, description, ratingCount, quantity;
+    TextView price, rating, description, ratingCount, quantity, name;
     int totalQuantity = 1;
     double totalPrice;
     ImageView addItem, removeItem;
@@ -69,6 +69,7 @@ public class ProductDetailActivity extends AppCompatActivity {
         }
 
         imgDetail = findViewById(R.id.imgDetail);
+        name = findViewById(R.id.tvDetailName);
         price = findViewById(R.id.tvDetailPrice);
         rating = findViewById(R.id.tvDetailRating);
         ratingBar = findViewById(R.id.rbarDetailIndicator);
@@ -81,6 +82,7 @@ public class ProductDetailActivity extends AppCompatActivity {
 
         if (product != null) {
             Glide.with(getApplicationContext()).load(product.getImgUrl()).into(imgDetail);
+            name.setText(product.getName());
             price.setText("Giá: " + product.getPrice());
             rating.setText(product.getRating());
             description.setText(product.getDescription());
